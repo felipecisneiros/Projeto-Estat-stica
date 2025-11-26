@@ -1,0 +1,30 @@
+resources:
+  jobs:
+    Projeto_Estatística:
+      name: Projeto Estatística
+      tasks:
+        - task_key: 01_Data_Ingestion
+          notebook_task:
+            notebook_path: /Workspace/Users/fca@cesar.school/01_Data_Ingestion
+            source: WORKSPACE
+        - task_key: 02_Data_Cleaning
+          depends_on:
+            - task_key: 01_Data_Ingestion
+          notebook_task:
+            notebook_path: /Workspace/Users/fca@cesar.school/02_Data_Cleaning
+            source: WORKSPACE
+        - task_key: 03_Gold_Business_Metrics
+          depends_on:
+            - task_key: 02_Data_Cleaning
+          notebook_task:
+            notebook_path: /Workspace/Users/fca@cesar.school/03_Gold_Business_Metrics
+            source: WORKSPACE
+        - task_key: 04_Analytical_Report
+          depends_on:
+            - task_key: 03_Gold_Business_Metrics
+          notebook_task:
+            notebook_path: /Workspace/Users/fca@cesar.school/04_Analytical_Report
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
